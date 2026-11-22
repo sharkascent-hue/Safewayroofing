@@ -456,6 +456,7 @@ def page(path, title, desc, body, lp=False, faqs=None, crumbs=None, index=True, 
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{canon}">
 {'<meta name="robots" content="noindex,follow">' if not index else ''}
+<meta name="google-site-verification" content="z1YDHfIG-z7EjFjYBcqh3zgGFHOAmvXUZkDDYD0CQLc">
 <meta name="theme-color" content="#0d0d0f">
 <meta property="og:type" content="website"><meta property="og:site_name" content="{e(NAME)}">
 <meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}">
