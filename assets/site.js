@@ -6,9 +6,8 @@
      SETTINGS — fill these in before going live.
      ------------------------------------------------------------------ */
   var CFG = {
-    // Where quote forms are delivered. FormSubmit sends each enquiry to this inbox;
-    // the FIRST real submission triggers a one-off activation email that must be clicked.
-    formEndpoint: 'https://formsubmit.co/ajax/safewayroofing.chimneys@gmail.com',
+    // Quote forms are delivered by Web3Forms to the inbox linked to the access key in each form.
+    formEndpoint: 'https://api.web3forms.com/submit',
     whatsapp: '353874858556',
     // Google tags. Leave blank and nothing is loaded and no cookie banner is shown.
     googleAdsId: '',        // e.g. 'AW-1234567890'
@@ -167,14 +166,19 @@
         el.closest('.fld').classList.toggle('err', !ok); if (!ok) bad = true;
       });
       if (bad) { msg.className = 'fmsg bad'; msg.textContent = 'Please add your name and a phone number we can reach you on.'; return; }
-      if (d.get('_honey')) return;
-      d.append('_subject', 'New quote request: ' + (d.get('service') || 'Website enquiry') + ' (' + (d.get('area') || 'area not given') + ')');
-      d.append('_template', 'table'); d.append('_captcha', 'false');
+      if (d.get('botcheck')) return;
+      var em = f.elements.email;
+      if (em && em.value.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value.trim())) {
+        em.closest('.fld').classList.add('err'); msg.className = 'fmsg bad'; msg.textContent = 'That email address does not look right. Fix it or leave it blank.'; return;
+      }
+      if (em) em.closest('.fld').classList.remove('err');
+      d.set('subject', 'New quote request: ' + (d.get('service') || 'Website enquiry') + ' (' + (d.get('area') || 'area not given') + ')');
+      d.delete('redirect'); d.delete('botcheck');
       d.append('page', location.pathname);
       Object.keys(src).forEach(function (k) { d.append(k, src[k]); });
       btn.disabled = true; var label = btn.innerHTML; btn.textContent = 'Sending…';
       fetch(CFG.formEndpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: d })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (r) { return r.json().then(function (j) { if (!r.ok || !j.success) throw new Error(j.message || r.status); }); })
         .then(function () {
           gtag('event', 'generate_lead', { form: f.getAttribute('data-quote') });
           try { sessionStorage.setItem('sw-lead', '1'); } catch (e) {}

@@ -7,12 +7,13 @@ import json, os, html, datetime
 HERE = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://safewayroofing.ie/"
 NAME = "Safeway Roofing & Chimneys"
+WEB3FORMS_KEY = "7748148c-204d-4a3c-8840-97f3983c77b4"  # public key: tells Web3Forms which inbox gets the enquiries
 PHONE, TEL, WA = "087 485 8556", "+353874858556", "353874858556"
 EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "15"
+V = "16"
 e = html.escape
 
 ICON = {
@@ -287,17 +288,22 @@ def form(r, fid, title="Get your quote", sub="Tell us about the job and we will 
     opts = "".join(f'<option{" selected" if s["name"]==service else ""}>{e(s["name"])}</option>' for s in SERVICES)
     emer = f'<option{" selected" if service=="Emergency repair" else ""}>Emergency repair</option>'
     msg = '<div class="fld full"><label for="{0}-m">How can we help? (optional)</label><textarea id="{0}-m" name="message" placeholder="e.g. water coming in around the chimney"></textarea></div>'.format(fid) if message else ""
-    return f'''<form class="fcard" id="{fid}" data-quote="{fid}" novalidate>
+    return f'''<form class="fcard" id="{fid}" data-quote="{fid}" action="https://api.web3forms.com/submit" method="POST" novalidate>
+<input type="hidden" name="access_key" value="{WEB3FORMS_KEY}">
+<input type="hidden" name="subject" value="New quote request from safewayroofing.ie">
+<input type="hidden" name="from_name" value="Safeway Roofing website">
+<input type="hidden" name="redirect" value="{DOMAIN}thank-you/">
 <{h}>{e(title)}</{h}><p class="fsub">{e(sub)}</p>
 <div class="fmsg" role="alert" aria-live="polite"></div>
 <div class="fgrid">
 <div class="fld"><label for="{fid}-n">Name</label><input id="{fid}-n" name="name" autocomplete="name" placeholder="Your name" required></div>
 <div class="fld"><label for="{fid}-p">Phone</label><input id="{fid}-p" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Phone number" required></div>
+<div class="fld"><label for="{fid}-e">Email (optional)</label><input id="{fid}-e" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"></div>
 <div class="fld"><label for="{fid}-a">Area</label><input id="{fid}-a" name="area" autocomplete="address-level2" placeholder="e.g. Dundrum"></div>
-<div class="fld"><label for="{fid}-s">Service</label><select id="{fid}-s" name="service"><option value="">Choose a service</option>{emer}{opts}<option>Other</option></select></div>
+<div class="fld full"><label for="{fid}-s">Service</label><select id="{fid}-s" name="service"><option value="">Choose a service</option>{emer}{opts}<option>Other</option></select></div>
 {msg}
 </div>
-<input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+<input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
 <button class="btn btn-red btn-block" type="submit" style="margin-top:14px">Get my quote {ic("arrow")}</button>
 <div class="for">or talk to us now</div>
 <div class="alt"><a class="btn btn-line" href="tel:{TEL}">{ic("phone")} {PHONE}</a><a class="btn btn-wa" href="https://wa.me/{WA}" target="_blank" rel="noopener">{ic("wa")} WhatsApp</a></div>
@@ -668,7 +674,7 @@ def privacy(r):
 <h2>3. How we use your information</h2><ul><li>To reply to your enquiry and prepare a quote</li><li>To schedule, carry out and manage work you have booked, including emergency call-outs</li><li>To issue invoices and guarantees and keep accounting records</li><li>To contact you about your project, including follow-up and aftercare</li><li>To understand which pages and adverts lead to enquiries, where you have consented</li><li>To meet our legal, tax and insurance obligations</li></ul>
 <p>We do not sell your personal data, and we do not use it for unrelated marketing without your consent.</p>
 <h2>4. Legal basis for processing</h2><p>Under data protection law (including the GDPR) we rely on: <strong>contract</strong> (to provide a quote or carry out work you request), <strong>legitimate interests</strong> (to run and secure our business and respond to enquiries), <strong>legal obligation</strong> (accounting, tax and insurance records) and <strong>consent</strong> (for optional cookies). Where we rely on consent, you can withdraw it at any time.</p>
-<h2>5. Quote forms</h2><p>Details you submit through our forms are sent to us by email through a form delivery provider (FormSubmit) so we can respond. We use them only to deal with your request and to follow up on it.</p>
+<h2>5. Quote forms</h2><p>Details you submit through our forms are sent to us by email through a form delivery provider (Web3Forms) so we can respond. We use them only to deal with your request and to follow up on it.</p>
 <h2>6. WhatsApp and phone contact</h2><p>If you contact us by phone or WhatsApp, we keep the details you share (such as your number and messages) only to respond and manage your enquiry or project. WhatsApp is operated by a third party and is subject to its own privacy policy.</p>
 <h2>7. Cookies and advertising</h2><p>This website does not need cookies to work. If you accept the cookie notice, Google cookies are used to measure visits and to tell us when an advert led to an enquiry. If you decline, those cookies are not set. You can change your mind by clearing this site’s data in your browser. Fonts are loaded from Google Fonts and the map on our contact page is provided by Google Maps; both are subject to Google’s privacy policy.</p>
 <h2>8. Sharing your information</h2><p>We only share personal data with trusted providers who help us run our business, for example website hosting, email and form services, accountants and insurers, and where we are required to by law. Some providers may process data outside the European Economic Area; where this happens we take reasonable steps to make sure appropriate safeguards are in place.</p>
