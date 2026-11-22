@@ -12,7 +12,7 @@ EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "5"
+V = "7"
 e = html.escape
 
 ICON = {
@@ -396,6 +396,9 @@ def footer(r, lp=False):
 <div><h4>Contact</h4><ul><li><a href="tel:{TEL}"><strong style="color:#fff;font-size:1.2rem">{PHONE}</strong></a></li><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li>{ADDR}</li><li>24/7 emergency line</li></ul></div>
 </div>{bot}</div></footer>''' + extras
 
+INTRO = ('<div class="intro-scr" aria-hidden="true"><div class="intro-c"><div class="intro-logo">'
+  '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56"/></svg><img src="{r}assets/img/logo-192.png" alt="" width="120" height="120"></div>'
+  '<div class="intro-word"><i style="--i:0">S</i><i style="--i:1">A</i><i style="--i:2">F</i><i style="--i:3">E</i><i style="--i:4">W</i><i style="--i:5">A</i><i style="--i:6">Y</i></div><div class="intro-sub">Roofing &amp; Chimneys</div></div></div>')
 PAGES = []  # (path, indexable)
 
 def page(path, title, desc, body, lp=False, faqs=None, crumbs=None, index=True, body_attr="", ogimg="og.jpg"):
@@ -428,11 +431,11 @@ def page(path, title, desc, body, lp=False, faqs=None, crumbs=None, index=True, 
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,600;0,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{r}assets/style.css?v={V}">
-<script>document.documentElement.className+=' js'</script>
+<script>(function(d){{d.className+=' js';{"" if lp else "try{if(!sessionStorage.getItem('sw-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.className+=' intro';sessionStorage.setItem('sw-intro','1');setTimeout(function(){d.className+=' intro-out'},1750);setTimeout(function(){d.className=d.className.replace(/ intro(-out)?/g,'')},2600)}}catch(e){}"}}})(document.documentElement)</script>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body{' class="lp"' if lp else ''}{body_attr}>
-<a class="skip" href="#main">Skip to content</a>
+{'' if lp else INTRO.format(r=r)}<a class="skip" href="#main">Skip to content</a>
 {header(r, path, lp)}
 <main id="main">
 {body(r)}
