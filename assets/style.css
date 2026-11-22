@@ -382,3 +382,10 @@ main,.ftr{overflow-x:hidden}
   .burger{width:44px;height:44px}
   .wrap{width:min(var(--wrap),100% - 28px)}
 }
+/* registered / accreditation strip (above footer) */
+.certs{background:#fff;border-top:1px solid var(--line);padding:44px 0 48px;text-align:center}
+.certs .eyebrow{justify-content:center;margin-bottom:22px}
+.certrow{display:flex;justify-content:center;align-items:center;gap:clamp(28px,6vw,70px);flex-wrap:wrap}
+.certrow img{height:96px;width:auto;object-fit:contain}
+@media (max-width:560px){.certrow img{height:72px}.certs{padding:34px 0 38px}}
+@media (max-width:560px){.certs .eyebrow{letter-spacing:.12em;font-size:.74rem;flex-direction:column;gap:10px}}

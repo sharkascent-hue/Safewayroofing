@@ -12,7 +12,7 @@ EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "4"
+V = "5"
 e = html.escape
 
 ICON = {
@@ -376,6 +376,8 @@ def header(r, path, lp=False):
 <div class="mnav" id="mnav"><div class="mnav-top">{brand}<button class="burger" style="display:inline-flex" data-menu="close" aria-label="Close menu">{ic("x")}</button></div>
 {m}<div class="btn-row"><a class="btn btn-red" href="{r}contact-us/#quote">Get your quote</a><a class="btn btn-ghost" href="tel:{TEL}">{ic("phone")} Call {PHONE}</a><a class="btn btn-wa" href="https://wa.me/{WA}">{ic("wa")} WhatsApp us</a></div></div>'''
 
+CERTS = lambda r: f'<section class="certs"><div class="wrap"><span class="eyebrow">Qualified, registered &amp; fully insured</span><div class="certrow"><img src="{r}assets/img/cro-registered.webp" alt="Registered with the Companies Registration Office (CRO)" loading="lazy"><img src="{r}assets/img/guild-master-craftsmen.webp" alt="National Guild of Master Craftsmen" loading="lazy"></div></div></section>'
+
 def footer(r, lp=False):
     credit = '<a class="credit" href="https://almlabmarketing.com" target="_blank" rel="noopener">Website by <img src="https://almlabmarketing.com/almlab-credit.png" alt="AlmLab" loading="lazy"></a>'
     bot = f'<div class="f-bot"><span>© <span id="yr">2026</span> {e(NAME)}. All rights reserved. · VAT registered business · <a href="{r}privacy-policy/">Privacy policy</a></span>{credit}</div>'
@@ -384,9 +386,9 @@ def footer(r, lp=False):
 <div class="cookie" id="cookie" role="dialog" aria-label="Cookies"><p>We use Google cookies to measure visits and how our ads perform. You can accept or decline. <a href="{r}privacy-policy/">Privacy policy</a></p><div class="btn-row" style="margin-top:12px"><button class="btn btn-ghost" data-consent="no">Decline</button><button class="btn btn-red" data-consent="yes">Accept</button></div></div>
 {LB}<script src="{r}assets/site.js?v={V}" defer></script>'''
     if lp:
-        return f'<footer class="ftr" style="padding-top:0"><div class="wrap">{bot.replace("margin-top:50px","")}</div></footer>' .replace('class="f-bot"','class="f-bot" style="margin-top:0;border-top:0"') + extras
+        return CERTS(r) + f'<footer class="ftr" style="padding-top:0"><div class="wrap">{bot.replace("margin-top:50px","")}</div></footer>' .replace('class="f-bot"','class="f-bot" style="margin-top:0;border-top:0"') + extras
     sv = "".join(f'<li><a href="{r}our-services/{s["slug"]}/">{e(s["nav"])}</a></li>' for s in SERVICES[:8])
-    return f'''<footer class="ftr"><div class="wrap"><div class="cols">
+    return CERTS(r) + f'''<footer class="ftr"><div class="wrap"><div class="cols">
 <div class="f-brand"><img src="{r}assets/img/logo.webp" width="110" height="110" alt="{e(NAME)}" loading="lazy"><p>{e(NAME)} is your local choice for roofing, guttering and chimney work in Dublin, Kildare and Wicklow.</p>
 <div class="soc"><a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook">{ic("fb")}</a><a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram">{ic("ig")}</a><a href="https://wa.me/{WA}" target="_blank" rel="noopener" aria-label="WhatsApp">{ic("wa")}</a></div></div>
 <div><h4>Services</h4><ul>{sv}<li><a href="{r}our-services/">All services</a></li></ul></div>
@@ -507,7 +509,7 @@ def home(r):
 <section class="sec soft"><div class="wrap split flip"><div class="media tall rv">{img(r,"work-white-fascia-soffit-gutter-house","New fascia, soffit and guttering fitted by Safeway",sm=False)}</div>
 <div class="rv"><span class="eyebrow">Why Safeway</span><h2>Why Safeway Roofing &amp; Chimneys.</h2><p class="lead">{e(NAME)} covers roofing, guttering and chimney jobs throughout Dublin, Kildare and Wicklow. Our skilled, insured crew delivers dependable results that protect your home and improve its appearance.</p>
 {ticks(["Qualified, fully insured tradespeople","Prompt response and punctual service","Quality materials for lasting results","Clear, upfront quotes with clear pricing","10 year written guarantee with every completed project","VAT registered business"],"light one")}
-<div class="trust" style="margin-top:26px"><img src="{r}assets/img/guild-master-craftsmen.webp" alt="National Guild of Master Craftsmen" loading="lazy"><span style="font-weight:600;max-width:24ch">National Guild of Master Craftsmen</span></div>
+<div class="trust" style="margin-top:26px"><img src="{r}assets/img/cro-registered.webp" alt="Companies Registration Office" loading="lazy" style="width:120px"><img src="{r}assets/img/guild-master-craftsmen.webp" alt="National Guild of Master Craftsmen" loading="lazy"><span style="font-weight:600;max-width:24ch">CRO registered · National Guild of Master Craftsmen</span></div>
 <div class="btn-row"><a class="btn btn-red" href="{r}contact-us/#quote">Get your quote {ic("arrow")}</a></div></div></div></section>
 
 <section class="sec dark"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Customer reviews</span><h2>What our customers say.</h2></div><a class="btn btn-ghost" href="{r}reviews/">Read more reviews {ic("arrow")}</a></div>{reviews_html()}</div></section>
