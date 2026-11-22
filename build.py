@@ -12,7 +12,7 @@ EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "10"
+V = "12"
 e = html.escape
 
 ICON = {
