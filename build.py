@@ -12,7 +12,7 @@ EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "13"
+V = "15"
 e = html.escape
 
 ICON = {
@@ -344,21 +344,17 @@ def scards(r, items, numbered=True):
 
 NAV = [("Home",""),("About","about-us/"),("Services","our-services/"),("Our Work","our-work/"),("Areas","areas-we-cover/"),("Reviews","reviews/"),("Contact","contact-us/")]
 
-# County flags for the top bar, drawn in each county's colours (left half = hoist side)
-def flag(a, b2, name):
-    return (f'<span class="flag" title="{name}"><svg viewBox="0 0 30 20" aria-hidden="true">'
-            f'<rect width="15" height="20" fill="{a}"/><rect x="15" width="15" height="20" fill="{b2}"/>'
-            f'<rect width="30" height="20" fill="url(#fw)"/></svg><span>{name}</span></span>')
-FLAG_DEFS = ('<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="fw" x1="0" x2="1">'
-             '<stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".3" stop-color="#000" stop-opacity=".12"/>'
-             '<stop offset=".55" stop-color="#fff" stop-opacity=".16"/><stop offset=".8" stop-color="#000" stop-opacity=".14"/>'
-             '<stop offset="1" stop-color="#fff" stop-opacity=".1"/></linearGradient></defs></svg>')
-FLAGS = ('<span class="tb-flags" role="img" aria-label="Serving Dublin, Kildare and Wicklow">'
-         + flag("#0b2a55", "#6cace4", "Dublin") + flag("#ffffff", "#ffffff", "Kildare") + flag("#0033a0", "#ffd100", "Wicklow") + '</span>')
+# County flags for the top bar (images in assets/img/flag-*.webp)
+def flag(slug, name, r):
+    return (f'<span class="flag" title="{name}"><img src="{r}assets/img/flag-{slug}-sm.webp" width="33" height="22" alt="" decoding="async">'
+            f'<span>{name}</span></span>')
+def FLAGS(r):
+    return ('<span class="tb-flags" role="img" aria-label="Serving Dublin, Kildare and Wicklow">'
+            + flag("dublin", "Dublin", r) + flag("kildare", "Kildare", r) + flag("wicklow", "Wicklow", r) + '</span>')
 
 def header(r, path, lp=False):
     top = f'''<div class="topbar"><div class="wrap"><span><i class="pulse"></i>10 year written guarantee<span class="hide-m"> with every completed project</span></span>
-{FLAG_DEFS}{FLAGS}
+{FLAGS(r)}
 <span class="tb-r"><span class="tb-247">24/7 emergency<span class="hide-m"> line</span></span><a class="hide-m" href="tel:{TEL}">{ic("phone")} {PHONE}</a><a class="hide-m" href="{FB}" target="_blank" rel="noopener" aria-label="Facebook">{ic("fb")}</a><a class="hide-m" href="{IG}" target="_blank" rel="noopener" aria-label="Instagram">{ic("ig")}</a></span></div></div>'''
     brand = f'<a class="brand" href="{r}" aria-label="{e(NAME)} home"><img src="{r}assets/img/logo.webp" width="66" height="66" alt="{e(NAME)} logo"><span>Safeway<small>Roofing &amp; Chimneys</small></span></a>'
     if lp:

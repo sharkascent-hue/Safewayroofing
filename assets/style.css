@@ -426,6 +426,10 @@ html.intro{overflow:hidden;overscroll-behavior:none}
 /* county flags in the top bar */
 .tb-flags{display:flex;align-items:center;gap:16px}
 .flag{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
-.flag svg{width:24px;height:16px;flex:none;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.28),0 2px 5px rgba(0,0,0,.3)}
+.flag img{width:33px;height:22px;flex:none;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.25),0 2px 6px rgba(0,0,0,.3)}
 @media (max-width:1100px){.flag>span{display:none}.tb-flags{gap:8px}}
-@media (max-width:560px){.topbar .tb-247{display:none}.flag svg{width:21px;height:14px}}
+@media (max-width:560px){.topbar .tb-247{display:none}.flag img{width:27px;height:18px}}
+/* keep the top bar on one line at every width */
+.topbar .wrap>span,.topbar a,.topbar .tb-r>span{white-space:nowrap}
+@media (max-width:1100px){.topbar .wrap>span:first-child .hide-m{display:none}}
+@media (max-width:400px){.topbar{font-size:.74rem}.tb-flags{gap:6px}.flag img{width:24px;height:16px}.topbar .wrap{gap:8px}.pulse{margin-right:6px}}
