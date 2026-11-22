@@ -417,3 +417,10 @@ main,.ftr{overflow-x:hidden}
 @keyframes outRed{0%{transform:translateY(100%)}100%{transform:translateY(0)}}
 @keyframes outScr{to{transform:translateY(-100%)}}
 @media (prefers-reduced-motion:reduce){.intro-scr{display:none!important}}
+/* intro hardening: hold the entrance until font + logo are ready, lock scrolling, no taps through */
+.intro:not(.intro-go) .intro-scr *,.intro:not(.intro-go) .intro-scr::before{animation-play-state:paused!important}
+.intro,.intro body{overflow:hidden;overscroll-behavior:none}
+.intro .intro-scr{touch-action:none;will-change:transform;backface-visibility:hidden;contain:strict}
+.intro .intro-c,.intro .intro-word i,.intro-logo{will-change:transform,opacity}
+.intro-nofont .intro-word,.intro-nofont .intro-sub{display:none}
+.intro-noimg .intro-logo img{visibility:hidden}

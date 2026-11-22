@@ -135,9 +135,20 @@
     var lite = reduce || (navigator.connection && navigator.connection.saveData);
     if (lite) { vid.autoplay = false; vid.preload = 'none'; vid.pause(); }
     else if ('IntersectionObserver' in window) {
+      // while the intro splash is up, hold the video so it doesn't compete with the animation
+      var html = document.documentElement, held = /\bintro\b/.test(html.className) && !/intro-out/.test(html.className);
+      if (held) {
+        vid.autoplay = false; vid.pause();
+        var mo = new MutationObserver(function () {
+          if (/intro-out/.test(html.className) || !/\bintro\b/.test(html.className)) {
+            mo.disconnect(); held = false; var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {});
+          }
+        });
+        mo.observe(html, { attributes: true, attributeFilter: ['class'] });
+      }
       new IntersectionObserver(function (en) {
         en.forEach(function (x) {
-          if (x.isIntersecting) { var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); } else vid.pause();
+          if (x.isIntersecting) { if (held) return; var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); } else vid.pause();
         });
       }).observe(vid);
     }

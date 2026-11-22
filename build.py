@@ -12,7 +12,7 @@ EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "7"
+V = "10"
 e = html.escape
 
 ICON = {
@@ -396,8 +396,27 @@ def footer(r, lp=False):
 <div><h4>Contact</h4><ul><li><a href="tel:{TEL}"><strong style="color:#fff;font-size:1.2rem">{PHONE}</strong></a></li><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li>{ADDR}</li><li>24/7 emergency line</li></ul></div>
 </div>{bot}</div></footer>''' + extras
 
+INTRO_JS = ("try{var nc=navigator.connection;if(!sessionStorage.getItem('sw-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(nc&&(nc.saveData||/2g|3g/.test(nc.effectiveType||'')))){"
+  "sessionStorage.setItem('sw-intro','1');d.className+=' intro';"
+  # end: remove all intro classes exactly once
+  "var ended=0,end=function(){if(ended)return;ended=1;d.className=d.className.replace(/ intro(-go|-out|-nofont|-noimg)?/g,'')};"
+  # out: start the exit; finish when the slide-out animation really ends (fallback 1.6s after exit starts)
+  "var out=function(){d.className+=' intro-out';var s=document.querySelector('.intro-scr');"
+  "if(s)s.addEventListener('animationend',function(e){if(e.animationName==='outScr')end()});setTimeout(end,1600)};"
+  # go: start once the heading font + logo are ready, waiting at most 900ms.
+  # Anything not ready by then is left out (no late pop-in or font swap mid-animation).
+  "var fontOk=0,imgOk=0,gone=0,go=function(){if(gone)return;gone=1;"
+  "if(!fontOk)d.className+=' intro-nofont';if(!imgOk)d.className+=' intro-noimg';"
+  "d.className+=' intro-go';setTimeout(out,1750)};"
+  "var ready=[];if(document.fonts&&document.fonts.load)ready.push(document.fonts.load('italic 800 40px Barlow').then(function(f){fontOk=f&&f.length?1:0}));"
+  "var im=new Image();im.src=d.getAttribute('data-root')+'assets/img/logo-192.png';"
+  "ready.push(im.decode?im.decode().then(function(){imgOk=1}):new Promise(function(r){im.onload=function(){imgOk=1;r()};im.onerror=r}));"
+  "ready.push(new Promise(function(r){if(document.readyState!=='loading')r();else document.addEventListener('DOMContentLoaded',r)}));"
+  # start on a fresh frame after the page has finished setting up, so the first frames don't stutter
+  "var go2=function(){requestAnimationFrame(function(){requestAnimationFrame(go)})};"
+  "Promise.all(ready).then(go2,go2);setTimeout(go,1200)}}catch(e){}")
 INTRO = ('<div class="intro-scr" aria-hidden="true"><div class="intro-c"><div class="intro-logo">'
-  '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56"/></svg><img src="{r}assets/img/logo-192.png" alt="" width="120" height="120"></div>'
+  '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56"/></svg><img src="{r}assets/img/logo-192.png" alt="" width="120" height="120" fetchpriority="high"></div>'
   '<div class="intro-word"><i style="--i:0">S</i><i style="--i:1">A</i><i style="--i:2">F</i><i style="--i:3">E</i><i style="--i:4">W</i><i style="--i:5">A</i><i style="--i:6">Y</i></div><div class="intro-sub">Roofing &amp; Chimneys</div></div></div>')
 PAGES = []  # (path, indexable)
 
@@ -427,11 +446,12 @@ def page(path, title, desc, body, lp=False, faqs=None, crumbs=None, index=True, 
 <meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{canon}"><meta property="og:image" content="{DOMAIN}assets/img/{ogimg}">
 <meta name="twitter:card" content="summary_large_image">
+{'' if lp else f'<link rel="preload" as="image" href="{r}assets/img/logo-192.png">'}
 <link rel="icon" type="image/png" href="{r}assets/img/favicon-48.png"><link rel="apple-touch-icon" href="{r}assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,600;0,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{r}assets/style.css?v={V}">
-<script>(function(d){{d.className+=' js';{"" if lp else "try{if(!sessionStorage.getItem('sw-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.className+=' intro';sessionStorage.setItem('sw-intro','1');setTimeout(function(){d.className+=' intro-out'},1750);setTimeout(function(){d.className=d.className.replace(/ intro(-out)?/g,'')},2600)}}catch(e){}"}}})(document.documentElement)</script>
+<script>(function(d){{d.className+=' js';{"" if lp else INTRO_JS}}})(document.documentElement)</script>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body{' class="lp"' if lp else ''}{body_attr}>
