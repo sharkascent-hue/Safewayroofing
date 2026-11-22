@@ -362,3 +362,23 @@ svg.i.f{fill:currentColor;stroke:none}
   .grid.g4 .scard h3{font-size:1.05rem}
   .grid.g4 .scard .sc-b{padding:14px}
 }
+/* never let anything widen the page sideways (stops left/right dragging on phones) */
+main,.ftr{overflow-x:hidden}
+@supports (overflow:clip){main,.ftr{overflow-x:clip}}
+@media (max-width:860px){
+  .js .rv.rv-l,.js .rv.rv-r{transform:translateY(40px)}
+  .js .rv.rv-l.in,.js .rv.rv-r.in{transform:none}
+  .js .hero .wrap>#quote{animation-name:heroIn}
+}
+.lp .hdr-phone span{display:inline}
+@media (max-width:860px){.lp .hdr-phone span{display:none}}
+@media (max-width:400px){
+  .hdr .wrap{gap:10px}
+  .hdr-cta{gap:8px}
+  .brand{gap:8px;min-width:0}
+  .brand img{width:46px;height:46px}
+  .brand span{font-size:.98rem}
+  .brand small{font-size:.55rem;letter-spacing:.1em}
+  .burger{width:44px;height:44px}
+  .wrap{width:min(var(--wrap),100% - 28px)}
+}

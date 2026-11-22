@@ -12,7 +12,7 @@ EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "3"
+V = "4"
 e = html.escape
 
 ICON = {
@@ -349,7 +349,7 @@ def header(r, path, lp=False):
 <span class="tb-r"><span>24/7 emergency<span class="hide-m"> line</span></span><a class="hide-m" href="tel:{TEL}">{ic("phone")} {PHONE}</a><a class="hide-m" href="{FB}" target="_blank" rel="noopener" aria-label="Facebook">{ic("fb")}</a><a class="hide-m" href="{IG}" target="_blank" rel="noopener" aria-label="Instagram">{ic("ig")}</a></span></div></div>'''
     brand = f'<a class="brand" href="{r}" aria-label="{e(NAME)} home"><img src="{r}assets/img/logo.webp" width="66" height="66" alt="{e(NAME)} logo"><span>Safeway<small>Roofing &amp; Chimneys</small></span></a>'
     if lp:
-        return top + f'''<header class="hdr"><div class="wrap">{brand}<div class="hdr-cta"><a class="hdr-phone" href="tel:{TEL}">{ic("phone")} {PHONE}</a><a class="btn btn-red hide-m" href="#quote">Get your quote</a></div></div></header>'''
+        return top + f'''<header class="hdr"><div class="wrap">{brand}<div class="hdr-cta"><a class="hdr-phone" href="tel:{TEL}" aria-label="Call {PHONE}">{ic("phone")} <span>{PHONE}</span></a><a class="btn btn-red hide-m" href="#quote">Get your quote</a></div></div></header>'''
     def cur(p):
         return ' aria-current="page"' if (p == path or (p and path.startswith(p))) and not (p == "" and path) else ""
     li = ""
@@ -468,7 +468,7 @@ def home(r):
     mq = "".join(f"<span>{e(s['nav'])}</span>" for s in SERVICES) + "<span>Dublin · Kildare · Wicklow</span>"
     homegal = [f for f,_,_ in WORK[:10]]
     acols = "".join(f'<div class="acol rv"><h3>{ic("pin")} {k}</h3><ul class="chips">' + "".join(f"<li>{a}</li>" for a in v[:12]) + f'<li>+ more</li></ul></div>' for k, v in AREAS.items())
-    return f'''<section class="hero hero-video"><video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{r}assets/img/safeway-van.webp" aria-hidden="true"><source src="{r}assets/video/hero.mp4?v={V}" type="video/mp4"></video><div class="hero-stripe"></div>
+    return f'''<section class="hero hero-video"><video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{r}assets/img/safeway-van.webp" aria-hidden="true"><source src="{r}assets/video/hero.mp4?v=3" type="video/mp4"></video><div class="hero-stripe"></div>
 <div class="wrap"><div>
 <span class="pill"><span class="stars">★★★★★</span> Trusted by homeowners in Dublin, Kildare &amp; Wicklow</span><br>
 <span class="eyebrow">Roofing · Guttering · Chimneys</span>
