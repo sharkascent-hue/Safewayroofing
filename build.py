@@ -257,17 +257,6 @@ SERVICES = [
     ("Can painting be done with roofline work?","Yes. Many customers have the exterior painted at the same time as new fascia, soffits or gutters, which makes good use of the access."),
     ("Do you prepare the walls first?","Always. Washing down, filling and priming come before painting so the finish lasts.")],
    ["work-white-fascia-soffit-gutter-house","work-black-fascia-soffit-gutter-render","work-gable-chimney-fascia-gutter"]),
- S("drone-roof-inspections","Drone Roof Inspections","HD photos and video of your roof, with no ladders and nothing missed.","svc-drone-inspection",
-   "Drone Roof Inspections in Dublin, Kildare & Wicklow",
-   "Drone roof inspections in Dublin, Kildare and Wicklow. HD photos and video, safe ladder-free surveys and clear advice from a fully insured roofing team.",
-   ["Some roof problems cannot be seen from the ground, and some roofs are awkward to reach safely. <strong>Safeway Roofing & Chimneys</strong> uses a drone to inspect roofs, chimneys and gutters across <strong>Dublin, Kildare and Wicklow</strong>, so you can see the condition of your roof for yourself.",
-    "You get HD photos and video of slates, tiles, ridges, valleys, flashing and chimney stacks, followed by straight advice on what needs attention now and what can wait."],
-   "Our 3-Step Process",
-   [("Book a Visit","Call or send the form and we will arrange a time that suits you."),("Drone Survey","We fly the roof and capture clear photos and video of every elevation, with no ladders on your walls."),("Report & Advice","We go through what we found and give you a clear quote for any work that is needed.")],
-   [("Why use a drone to inspect a roof?","It is safe and quick, it reaches places that are hard to see from a ladder and it gives you clear pictures of the actual problem."),
-    ("What can a drone inspection find?","Slipped or cracked slates and tiles, failed ridge mortar, damaged flashing and lead, blocked valleys and gutters, and chimney defects."),
-    ("Will I see the photos?","Yes. We show you the photos and video and explain what they mean before recommending any work.")],
-   ["work-terracotta-ridge-hip-tiles","work-terracotta-tile-roof-valley","work-roof-stripped-battens-gutter-view"]),
 ]
 SVC = {s["slug"]: s for s in SERVICES}
 MORE = ["Asphalt Roofs","Chimney Repairs","Felt Roofs","Fibreglass Roof","Flat Roofs","Garage Roofs","Guttering & Downpipes","Lead Roofs","Lead Work","Leaking Roofs – All Types","New Roofs & Re-Roofs","Soffits, Fascias & Cladding","Valleys & Gullies","Pitched Roofs","Pointing","Porch Roofs","Roof Flashing","Roof Lights","Roof Repairs","Roof Window Repairs","Roof Window Installs","Roofing Carpentry","Roof Inspections & Reports","Roof Insulation","Shed Roofs","Single Ply Rubber Roof","Slate & Tiled Roofs"]
@@ -491,12 +480,6 @@ def home(r):
 
 <section class="sec dark"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Our services</span><h2>Roofing, guttering &amp; chimney services for your home.</h2></div>
 <a class="btn btn-ghost" href="{r}our-services/">View all services {ic("arrow")}</a></div>{scards(r, SERVICES[:8])}</div></section>
-
-<section class="sec"><div class="wrap split"><div class="media rv">{img(r,"svc-drone-inspection","Drone inspecting a tiled roof",sm=False)}</div>
-<div class="rv"><span class="eyebrow">Drone roof inspections</span><h2>See your roof <span class="red">before</span> we quote.</h2>
-<p class="lead">We can send a drone up to check the whole roof, so you see exactly what needs doing, with no ladders and nothing missed.</p>
-{ticks(["HD photos and video of your roof","Safe, ladder-free inspections","Accurate and detailed reports","Fast results with expert advice"],"light")}
-<div class="btn-row"><a class="btn btn-red" href="{r}our-services/drone-roof-inspections/">Book your drone inspection {ic("arrow")}</a></div></div></div></section>
 
 <section class="sec soft"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Recent work</span><h2>Recent Safeway projects.</h2></div><a class="btn btn-line" href="{r}our-work/">View our work {ic("arrow")}</a></div>
 {gallery(r, homegal, numbered=True)}<p class="fnote" style="margin-top:16px">Tap a photo to see it full size.</p></div></section>
