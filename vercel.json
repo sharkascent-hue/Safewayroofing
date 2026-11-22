@@ -1,6 +1,0 @@
-{
-  "redirects": [
-    { "source": "/our-services/drone-roof-inspections", "destination": "/our-services/", "permanent": true },
-    { "source": "/our-services/drone-roof-inspections/", "destination": "/our-services/", "permanent": true }
-  ]
-}
