@@ -79,13 +79,69 @@
     });
   });
 
-  /* ---------- scroll reveal ---------- */
-  if ('IntersectionObserver' in window) {
+  /* ---------- scroll animations ---------- */
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function mark(el, cls, d) {
+    if (!el || el.closest('.hero')) return;
+    el.classList.add('rv');
+    if (cls) el.classList.add(cls);
+    if (d) el.style.setProperty('--d', d + 's');
+  }
+  // two-column blocks: text slides in from its side, photo wipes in
+  $$('.split').forEach(function (sp) {
+    var flip = sp.classList.contains('flip');
+    Array.prototype.forEach.call(sp.children, function (c, i) {
+      if (c.classList.contains('media')) mark(c);
+      else mark(c, (i === 0) !== flip ? 'rv-l' : 'rv-r');
+    });
+  });
+  $$('.sec-head').forEach(function (el) { mark(el); });
+  // staggered groups
+  [['.grid', ''], ['.gal', 'rv-zoom'], ['.acols', ''], ['.chips', 'rv-zoom'], ['.faq', ''], ['.lp-strip ul', ''],
+   ['.contact-list', 'rv-l'], ['.list2', ''], ['.filters', '']].forEach(function (g) {
+    $$(g[0]).forEach(function (box) {
+      if (box.closest('.hero')) return;
+      Array.prototype.forEach.call(box.children, function (c, i) {
+        if (c.tagName === 'SCRIPT') return;
+        mark(c, g[1], Math.min(i % 8, 7) * (g[0] === '.chips' ? 0.03 : 0.09));
+      });
+    });
+  });
+  $$('.cta-band .wrap>*').forEach(function (c, i) { mark(c, i ? '' : 'rv-l', i * 0.15); });
+  $$('.prose>*').forEach(function (c) { mark(c); });
+  $$('.ftr .cols>*').forEach(function (c, i) { mark(c, '', i * 0.1); });
+  if ('IntersectionObserver' in window && !reduce) {
     var io = new IntersectionObserver(function (en) {
       en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
-    }, { rootMargin: '0px 0px -8% 0px' });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
     $$('.rv').forEach(function (el) { io.observe(el); });
   } else { $$('.rv').forEach(function (el) { el.classList.add('in'); }); }
+
+  // scroll progress bar + gentle hero parallax
+  var bar = document.createElement('div'); bar.className = 'prog'; document.body.appendChild(bar);
+  var hbg = $('.hero .hero-bg'), ticking = false;
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - innerHeight, y = scrollY;
+    bar.style.transform = 'scaleX(' + (h > 0 ? y / h : 0) + ')';
+    if (hbg && !reduce && y < innerHeight * 1.2) hbg.style.translate = '0 ' + (y * 0.35) + 'px';
+    ticking = false;
+  }
+  addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+
+  // hero video: honour reduced motion / data saver, pause when off screen
+  var vid = $('video.hero-bg');
+  if (vid) {
+    var lite = reduce || (navigator.connection && navigator.connection.saveData);
+    if (lite) { vid.autoplay = false; vid.preload = 'none'; vid.pause(); }
+    else if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) {
+        en.forEach(function (x) {
+          if (x.isIntersecting) { var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); } else vid.pause();
+        });
+      }).observe(vid);
+    }
+  }
 
   /* ---------- quote forms ---------- */
   $$('form[data-quote]').forEach(function (f) {
