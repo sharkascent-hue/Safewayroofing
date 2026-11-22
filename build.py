@@ -12,7 +12,7 @@ EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "2"
+V = "3"
 e = html.escape
 
 ICON = {
@@ -468,7 +468,7 @@ def home(r):
     mq = "".join(f"<span>{e(s['nav'])}</span>" for s in SERVICES) + "<span>Dublin · Kildare · Wicklow</span>"
     homegal = [f for f,_,_ in WORK[:10]]
     acols = "".join(f'<div class="acol rv"><h3>{ic("pin")} {k}</h3><ul class="chips">' + "".join(f"<li>{a}</li>" for a in v[:12]) + f'<li>+ more</li></ul></div>' for k, v in AREAS.items())
-    return f'''<section class="hero hero-video"><video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{r}assets/img/safeway-van.webp" aria-hidden="true"><source src="{r}assets/video/hero.mp4" type="video/mp4"></video><div class="hero-stripe"></div>
+    return f'''<section class="hero hero-video"><video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{r}assets/img/safeway-van.webp" aria-hidden="true"><source src="{r}assets/video/hero.mp4?v={V}" type="video/mp4"></video><div class="hero-stripe"></div>
 <div class="wrap"><div>
 <span class="pill"><span class="stars">★★★★★</span> Trusted by homeowners in Dublin, Kildare &amp; Wicklow</span><br>
 <span class="eyebrow">Roofing · Guttering · Chimneys</span>
