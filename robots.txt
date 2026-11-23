@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://safewayroofing.ie/sitemap.xml
+Sitemap: https://www.safewayroofing.ie/sitemap.xml

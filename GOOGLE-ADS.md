@@ -1,7 +1,7 @@
 # Google Ads setup sheet: Safeway Roofing & Chimneys
 
 Everything below is already live on the website. Copy it into Google Ads.
-Replace `https://safewayroofing.ie/` with the Vercel address if the domain is not pointed at the new site yet.
+Replace `https://www.safewayroofing.ie/` with the Vercel address if the domain is not pointed at the new site yet.
 
 ## 1. Landing pages (Final URLs)
 
@@ -10,17 +10,17 @@ Hidden from Google search on purpose, which does not affect ads.
 
 | Ad group / keywords | Final URL |
 |---|---|
-| Roofers Dublin (general) | https://safewayroofing.ie/lp/roofers-dublin/ |
-| Roof repairs Dublin | https://safewayroofing.ie/lp/roof-repairs-dublin/ |
-| Emergency roof repairs / roof leaking | https://safewayroofing.ie/lp/emergency-roof-repairs/ |
-| Chimney repairs | https://safewayroofing.ie/lp/chimney-repairs-dublin/ |
-| Flat roofs | https://safewayroofing.ie/lp/flat-roofs-dublin/ |
-| Gutters, fascia & soffits | https://safewayroofing.ie/lp/gutters-fascia-soffits/ |
-| New roof / re-roofing | https://safewayroofing.ie/lp/new-roof-dublin/ |
-| Roof cleaning / moss removal | https://safewayroofing.ie/lp/roof-cleaning/ |
-| Drone roof inspection | https://safewayroofing.ie/lp/drone-roof-inspection/ |
-| Roofers Kildare | https://safewayroofing.ie/lp/roofers-kildare/ |
-| Roofers Wicklow | https://safewayroofing.ie/lp/roofers-wicklow/ |
+| Roofers Dublin (general) | https://www.safewayroofing.ie/lp/roofers-dublin/ |
+| Roof repairs Dublin | https://www.safewayroofing.ie/lp/roof-repairs-dublin/ |
+| Emergency roof repairs / roof leaking | https://www.safewayroofing.ie/lp/emergency-roof-repairs/ |
+| Chimney repairs | https://www.safewayroofing.ie/lp/chimney-repairs-dublin/ |
+| Flat roofs | https://www.safewayroofing.ie/lp/flat-roofs-dublin/ |
+| Gutters, fascia & soffits | https://www.safewayroofing.ie/lp/gutters-fascia-soffits/ |
+| New roof / re-roofing | https://www.safewayroofing.ie/lp/new-roof-dublin/ |
+| Roof cleaning / moss removal | https://www.safewayroofing.ie/lp/roof-cleaning/ |
+| Drone roof inspection | https://www.safewayroofing.ie/lp/drone-roof-inspection/ |
+| Roofers Kildare | https://www.safewayroofing.ie/lp/roofers-kildare/ |
+| Roofers Wicklow | https://www.safewayroofing.ie/lp/roofers-wicklow/ |
 
 Leave **auto-tagging ON** (Google Ads > Admin > Account settings). The site saves the ad click ID and sends it with every enquiry email.
 
@@ -28,14 +28,14 @@ Leave **auto-tagging ON** (Google Ads > Admin > Account settings). The site save
 
 | Sitelink text | Description line 1 | Description line 2 | URL |
 |---|---|---|---|
-| Request a Quote | Clear, upfront pricing | No obligation, fast reply | https://safewayroofing.ie/contact-us/ |
-| Roof Repairs | Leaks, slates and tiles fixed | Fully insured local team | https://safewayroofing.ie/our-services/roof-repairs/ |
-| Chimney Repairs | Brickwork, flashing, leaks | Repointing and lead work | https://safewayroofing.ie/our-services/chimney-repairs/ |
-| Gutters & Fascia | UPVC gutters, fascia, soffits | Black or white, neat finish | https://safewayroofing.ie/our-services/upvc-gutter-installation/ |
-| Drone Roof Inspections | HD photos of your roof | Safe, no ladders needed | https://safewayroofing.ie/our-services/drone-roof-inspections/ |
-| Our Recent Work | Photos of real Safeway jobs | Re-roofs, repairs, chimneys | https://safewayroofing.ie/our-work/ |
-| Customer Reviews | What our customers say | Homeowners across Dublin | https://safewayroofing.ie/reviews/ |
-| Areas We Cover | Dublin, Kildare & Wicklow | Check your town online | https://safewayroofing.ie/areas-we-cover/ |
+| Request a Quote | Clear, upfront pricing | No obligation, fast reply | https://www.safewayroofing.ie/contact-us/ |
+| Roof Repairs | Leaks, slates and tiles fixed | Fully insured local team | https://www.safewayroofing.ie/our-services/roof-repairs/ |
+| Chimney Repairs | Brickwork, flashing, leaks | Repointing and lead work | https://www.safewayroofing.ie/our-services/chimney-repairs/ |
+| Gutters & Fascia | UPVC gutters, fascia, soffits | Black or white, neat finish | https://www.safewayroofing.ie/our-services/upvc-gutter-installation/ |
+| Drone Roof Inspections | HD photos of your roof | Safe, no ladders needed | https://www.safewayroofing.ie/our-services/drone-roof-inspections/ |
+| Our Recent Work | Photos of real Safeway jobs | Re-roofs, repairs, chimneys | https://www.safewayroofing.ie/our-work/ |
+| Customer Reviews | What our customers say | Homeowners across Dublin | https://www.safewayroofing.ie/reviews/ |
+| Areas We Cover | Dublin, Kildare & Wicklow | Check your town online | https://www.safewayroofing.ie/areas-we-cover/ |
 
 ## 3. Callouts (max 25 characters each)
 

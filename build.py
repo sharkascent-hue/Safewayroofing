@@ -5,7 +5,7 @@ Edit copy in the data blocks below, styles in assets/style.css, behaviour/tracki
 import json, os, html, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DOMAIN = "https://safewayroofing.ie/"
+DOMAIN = "https://www.safewayroofing.ie/"
 NAME = "Safeway Roofing & Chimneys"
 WEB3FORMS_KEY = "7748148c-204d-4a3c-8840-97f3983c77b4"  # public key: tells Web3Forms which inbox gets the enquiries
 PHONE, TEL, WA = "087 485 8556", "+353874858556", "353874858556"
