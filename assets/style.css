@@ -433,3 +433,7 @@ html.intro{overflow:hidden;overscroll-behavior:none}
 .topbar .wrap>span,.topbar a,.topbar .tb-r>span{white-space:nowrap}
 @media (max-width:1100px){.topbar .wrap>span:first-child .hide-m{display:none}}
 @media (max-width:400px){.topbar{font-size:.74rem}.tb-flags{gap:6px}.flag img{width:24px;height:16px}.topbar .wrap{gap:8px}.pulse{margin-right:6px}}
+/* buttons rendered as <button> need an explicit background (browser default is light grey) */
+button.btn-ghost{background:transparent}
+.cookie .btn-ghost{color:#fff;border-color:rgba(255,255,255,.45)}
+.cookie .btn-ghost:hover{background:rgba(255,255,255,.1)}

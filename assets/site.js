@@ -10,9 +10,9 @@
     formEndpoint: 'https://api.web3forms.com/submit',
     whatsapp: '353874858556',
     // Google tags. Leave blank and nothing is loaded and no cookie banner is shown.
-    googleAdsId: '',        // e.g. 'AW-1234567890'
+    googleAdsId: 'AW-18591308016',
     ga4Id: '',              // e.g. 'G-XXXXXXXXXX'
-    convForm: '',           // Ads conversion label for a sent quote form, e.g. 'AbCdEfGhIjk'
+    convForm: 'YmXJCKmd7b0dEPCxg6FF', // 'Submit lead form' conversion
     convCall: '',           // Ads conversion label for a tap on the phone number
     convWhatsApp: ''        // Ads conversion label for a tap on WhatsApp
   };
@@ -28,7 +28,7 @@
   window.gtag = window.gtag || gtag;
   var tagIds = [CFG.googleAdsId, CFG.ga4Id].filter(Boolean);
   function conv(label, extra) {
-    if (CFG.googleAdsId && label) gtag('event', 'conversion', Object.assign({ send_to: CFG.googleAdsId + '/' + label }, extra || {}));
+    if (CFG.googleAdsId && label) gtag('event', 'conversion', Object.assign({ send_to: CFG.googleAdsId + '/' + label, value: 1.0, currency: 'EUR' }, extra || {}));
   }
   if (tagIds.length) {
     var choice = store('sw-consent');

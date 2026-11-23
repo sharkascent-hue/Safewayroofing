@@ -60,7 +60,12 @@ Phone: **087 485 8556** (Ireland). Turn on call reporting so calls from ads coun
 
 Link the Google Business Profile for Safeway Roofing & Chimneys, 51 Bracken Road, Dublin D18 CV48.
 
-## 7. Conversion tracking (one step left)
+## 7. Conversion tracking
+
+Done: Google tag `AW-18591308016` is live, and **Submit lead form** (label `YmXJCKmd7b0dEPCxg6FF`) fires once per sent quote form.
+Still to add: **Call click** and **WhatsApp click** labels (create them as below, category Contact, and send the labels over).
+
+### How they were created
 
 The tracking code is already in the website and switches itself on when the IDs are added.
 In Google Ads > Goals > Conversions, create these three website conversions ("Use Google tag", "Set up manually"):
