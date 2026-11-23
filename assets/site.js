@@ -39,15 +39,15 @@
     var s = document.createElement('script');
     s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + tagIds[0];
     document.head.appendChild(s);
-    var bar = $('#cookie');
-    if (bar && !choice) bar.classList.add('show');
+    var cookieBar = $('#cookie');
+    if (cookieBar && !choice) cookieBar.classList.add('show');
     $$('[data-consent]').forEach(function (b) {
       b.addEventListener('click', function () {
         var yes = b.getAttribute('data-consent') === 'yes';
         store('sw-consent', yes ? 'yes' : 'no');
         var v = yes ? 'granted' : 'denied';
         gtag('consent', 'update', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v });
-        bar.classList.remove('show');
+        cookieBar.classList.remove('show');
       });
     });
   }
@@ -117,11 +117,11 @@
   } else { $$('.rv').forEach(function (el) { el.classList.add('in'); }); }
 
   // scroll progress bar + gentle hero parallax
-  var bar = document.createElement('div'); bar.className = 'prog'; document.body.appendChild(bar);
+  var prog = document.createElement('div'); prog.className = 'prog'; document.body.appendChild(prog);
   var hbg = $('.hero .hero-bg'), ticking = false;
   function onScroll() {
     var h = document.documentElement.scrollHeight - innerHeight, y = scrollY;
-    bar.style.transform = 'scaleX(' + (h > 0 ? y / h : 0) + ')';
+    prog.style.transform = 'scaleX(' + (h > 0 ? y / h : 0) + ')';
     if (hbg && !reduce && y < innerHeight * 1.2) hbg.style.translate = '0 ' + (y * 0.35) + 'px';
     ticking = false;
   }

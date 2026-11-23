@@ -437,3 +437,26 @@ html.intro{overflow:hidden;overscroll-behavior:none}
 button.btn-ghost{background:transparent}
 .cookie .btn-ghost{color:#fff;border-color:rgba(255,255,255,.45)}
 .cookie .btn-ghost:hover{background:rgba(255,255,255,.1)}
+/* inner pages with the quote form in the hero (service + county pages) */
+.hero.inner.with-form .wrap{grid-template-columns:1.1fr .9fr;align-items:center;padding-block:clamp(36px,5vw,72px)}
+.hero.inner.with-form h1{font-size:clamp(2rem,4vw,3.3rem)}
+.hero-call{margin:18px 0 0;font-weight:600;color:#d7d7de}
+.hero-call a{color:#fff;text-decoration:none;font-family:var(--head);font-weight:800;font-size:1.15rem;display:inline-flex;gap:8px;align-items:center;margin-left:6px}
+@media (max-width:860px){
+  .hero.inner.with-form .wrap{grid-template-columns:1fr;gap:22px;padding-block:26px 34px}
+  .hero.inner.with-form .sub{font-size:1rem;margin-bottom:0}
+  .hero.inner.with-form .hero-call{display:none}
+  .hero.inner.with-form .crumbs{margin-bottom:12px}
+}
+.cookie p{margin:0}
+.cookie-btns{display:flex;gap:10px;margin-top:12px}
+/* phones: slim strip above the Call/WhatsApp bar so it doesn't cover the hero form */
+@media (max-width:860px){
+  .cookie{left:8px;right:8px;bottom:calc(74px + env(safe-area-inset-bottom));padding:10px 12px;border-radius:14px;display:none;align-items:center;gap:10px;font-size:.78rem;line-height:1.35}
+  .cookie.show{display:flex}
+  .cookie p{flex:1}
+  .cookie-btns{margin:0;gap:6px;flex:none}
+  .cookie .btn{padding:8px 12px;font-size:.8rem}
+}
+@media (max-width:860px){.hero.inner.with-form h1{font-size:clamp(1.8rem,7.4vw,2.4rem);margin-bottom:12px}.hero.inner.with-form .eyebrow{margin-bottom:12px}}
+@media (max-width:400px){.hero.inner.with-form .sub{display:none}.hero.inner.with-form .crumbs{display:none}}

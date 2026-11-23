@@ -13,7 +13,7 @@ EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "19"
+V = "22"
 e = html.escape
 
 ICON = {
@@ -398,7 +398,7 @@ def footer(r, lp=False):
     bot = f'<div class="f-bot"><span>© <span id="yr">2026</span> {e(NAME)}. All rights reserved. · VAT registered business · <a href="{r}privacy-policy/">Privacy policy</a></span>{credit}</div>'
     extras = f'''<a class="wa-fab" href="https://wa.me/{WA}" target="_blank" rel="noopener" aria-label="WhatsApp us">{ic("wa")}</a>
 <div class="mbar"><a class="c" href="tel:{TEL}">{ic("phone")} Call</a><a class="w" href="https://wa.me/{WA}">{ic("wa")} WhatsApp</a><a class="q" href="{'#quote' if lp else r+'contact-us/#quote'}">Quote</a></div>
-<div class="cookie" id="cookie" role="dialog" aria-label="Cookies"><p>We use Google cookies to measure visits and how our ads perform. You can accept or decline. <a href="{r}privacy-policy/">Privacy policy</a></p><div class="btn-row" style="margin-top:12px"><button class="btn btn-ghost" data-consent="no">Decline</button><button class="btn btn-red" data-consent="yes">Accept</button></div></div>
+<div class="cookie" id="cookie" role="dialog" aria-label="Cookies"><p>We use Google cookies to measure visits and how our ads perform. <a href="{r}privacy-policy/">Privacy policy</a></p><div class="cookie-btns"><button class="btn btn-ghost" data-consent="no">Decline</button><button class="btn btn-red" data-consent="yes">Accept</button></div></div>
 {LB}<script src="{r}assets/site.js?v={V}" defer></script>'''
     if lp:
         return CERTS(r) + f'<footer class="ftr" style="padding-top:0"><div class="wrap">{bot.replace("margin-top:50px","")}</div></footer>' .replace('class="f-bot"','class="f-bot" style="margin-top:0;border-top:0"') + extras
@@ -489,9 +489,14 @@ def page(path, title, desc, body, lp=False, faqs=None, crumbs=None, index=True, 
     open(out, "w", encoding="utf-8").write(doc)
     PAGES.append((path, index))
 
-def inner_hero(r, bg, eyebrow, h1, sub, crumbs, btns=True):
+def inner_hero(r, bg, eyebrow, h1, sub, crumbs, btns=True, form_html=""):
     cr = f'<a href="{r}">Home</a>' + "".join(f' <span>/</span> ' + (f'<a href="{r}{p}">{e(n)}</a>' if i < len(crumbs)-1 else f'<span>{e(n)}</span>') for i,(n,p) in enumerate(crumbs))
     b = f'<div class="btn-row"><a class="btn btn-red" href="#quote">Get your quote {ic("arrow")}</a><a class="btn btn-ghost" href="tel:{TEL}">{ic("phone")} {PHONE}</a></div>' if btns else ""
+    if form_html:  # quote form right beside (desktop) / directly under (phone) the headline
+        call = f'<p class="hero-call">Prefer to talk? <a href="tel:{TEL}">{ic("phone")} {PHONE}</a></p>'
+        return f'''<section class="hero inner with-form"><img class="hero-bg" src="{r}assets/img/{bg}.webp" alt="" fetchpriority="high"><div class="hero-stripe"></div>
+<div class="wrap"><div><nav class="crumbs" aria-label="Breadcrumb">{cr}</nav><span class="eyebrow">{e(eyebrow)}</span><h1>{h1}</h1><p class="sub">{sub}</p>{call}</div>
+<div id="quote">{form_html}</div></div></section>'''
     return f'''<section class="hero inner"><img class="hero-bg" src="{r}assets/img/{bg}.webp" alt="" fetchpriority="high"><div class="hero-stripe"></div>
 <div class="wrap"><div><nav class="crumbs" aria-label="Breadcrumb">{cr}</nav><span class="eyebrow">{e(eyebrow)}</span><h1>{h1}</h1><p class="sub">{sub}</p>{b}</div></div></section>'''
 
@@ -596,7 +601,7 @@ def service_page(s):
     def body(r):
         others = [x for x in SERVICES if x["slug"] != s["slug"]]
         i = SERVICES.index(s); rel = [SERVICES[(i+k) % len(SERVICES)] for k in (1,2,3,4)]
-        return inner_hero(r, s["img"], s["name"], s["h1"].replace("&","&amp;"), e(s["short"]) + " Fully insured, with a 10 year written guarantee on every completed project.", [("Our Services","our-services/"),(s["name"],"")]) + f'''
+        return inner_hero(r, s["img"], s["name"], s["h1"].replace("&","&amp;"), e(s["short"]) + " Fully insured, with a 10 year written guarantee on every completed project.", [("Our Services","our-services/"),(s["name"],"")], form_html=form(r, "hero-quote", title="Get your quote", sub="Tell us what you need and where. We will come back to you with a clear quote.", service=s["name"], message=False)) + f'''
 <section class="sec"><div class="wrap split"><div class="rv"><span class="eyebrow">{e(s["name"])}</span><h2>{e(s["nav"])} done <span class="red">properly.</span></h2>
 {"".join(f'<p{" class=lead" if k==0 else ""}>{p}</p>' for k,p in enumerate(s["intro"]))}
 <div class="btn-row"><a class="btn btn-red" href="#quote">Get your quote {ic("arrow")}</a><a class="btn btn-line" href="tel:{TEL}">{ic("phone")} {PHONE}</a></div></div>
@@ -606,7 +611,7 @@ def service_page(s):
 <section class="sec"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Recent work</span><h2>Recent Safeway projects.</h2></div><a class="btn btn-line" href="{r}our-work/">See all projects {ic("arrow")}</a></div>
 {gallery(r, s["gal"], cls="g3c" if len(s["gal"])==3 else "")}</div></section>
 <section class="sec soft"><div class="wrap"><div class="sec-head center"><span class="eyebrow">Common questions</span><h2>{e(s["nav"])}: your questions answered.</h2></div>{faq_html(s["faqs"])}</div></section>
-{quote_block(r, service=s["name"], h="Request a quote")}
+{quote_block(r, fid="quote-2", service=s["name"], h="Request a quote")}
 <section class="sec"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">More services</span><h2>Other ways we can help.</h2></div><a class="btn btn-line" href="{r}our-services/">All services {ic("arrow")}</a></div>{scards(r, rel, numbered=False)}</div></section>'''
     return body
 
@@ -632,7 +637,7 @@ def county_page(key):
     name, groups, pic, text = COUNTIES[key]
     def body(r):
         cols = "".join(f'<div class="acol rv"><h3>{ic("pin")} {g}</h3><ul class="chips">' + "".join(f"<li>{a}</li>" for a in AREAS[g]) + '</ul></div>' for g in groups)
-        return inner_hero(r,pic,f"Areas we cover · {name}",f"Roofers in {name}: roofing, guttering &amp; chimney repairs.",f"Fully insured, with a 10 year written guarantee on every completed project and a 24/7 emergency line.",[("Areas We Cover","areas-we-cover/"),(name,"")]) + f'''
+        return inner_hero(r,pic,f"Areas we cover · {name}",f"Roofers in {name}: roofing, guttering &amp; chimney repairs.",f"Fully insured, with a 10 year written guarantee on every completed project and a 24/7 emergency line.",[("Areas We Cover","areas-we-cover/"),(name,"")], form_html=form(r, "hero-quote", title="Get your quote", sub=f"Anywhere in {name}. Tell us what you need and we will come back to you with a clear quote.", message=False)) + f'''
 <section class="sec"><div class="wrap split"><div class="rv"><span class="eyebrow">Local to {name}</span><h2>Your roofing team in <span class="red">{name}.</span></h2><p class="lead">{text}</p>
 {ticks(WHY,"light one")}<div class="btn-row"><a class="btn btn-red" href="#quote">Get your quote {ic("arrow")}</a><a class="btn btn-line" href="tel:{TEL}">{ic("phone")} {PHONE}</a></div></div>
 <div class="media rv">{img(r,pic,"Safeway Roofing & Chimneys at work in "+name,sm=False)}<div class="badge-f"><b>10 Year</b><span>Written guarantee</span></div></div></div></section>
@@ -640,7 +645,7 @@ def county_page(key):
 <section class="sec dark"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Our services in {name}</span><h2>What we can do for your home.</h2></div><a class="btn btn-ghost" href="{r}our-services/">All services {ic("arrow")}</a></div>{scards(r, SERVICES[:8])}</div></section>
 <section class="sec"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Customer reviews</span><h2>What our customers say.</h2></div></div>{reviews_html()}</div></section>
 <section class="sec soft"><div class="wrap"><div class="sec-head center"><span class="eyebrow">FAQ</span><h2>Common questions.</h2></div>{faq_html(HOME_FAQ)}</div></section>
-{quote_block(r, h=f"Request a quote in {name}")}'''
+{quote_block(r, fid="quote-2", h=f"Request a quote in {name}")}'''
     return body
 
 def reviews(r):
