@@ -13,7 +13,7 @@ EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "16"
+V = "17"
 e = html.escape
 
 ICON = {
@@ -411,7 +411,11 @@ def footer(r, lp=False):
 <div><h4>Contact</h4><ul><li><a href="tel:{TEL}"><strong style="color:#fff;font-size:1.2rem">{PHONE}</strong></a></li><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li>{ADDR}</li><li>24/7 emergency line</li></ul></div>
 </div>{bot}</div></footer>''' + extras
 
-INTRO_JS = ("try{var nc=navigator.connection;if(!sessionStorage.getItem('sw-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(nc&&(nc.saveData||/2g|3g/.test(nc.effectiveType||'')))){"
+INTRO_JS = ("try{var nc=navigator.connection;"
+  # never for ad clicks (Google Ads click IDs / paid UTMs) or for Google's crawlers and page-speed tools
+  "var ad=/[?&](gclid|gbraid|wbraid|gad_source|gad_campaignid|dclid|msclkid|fbclid)=|[?&]utm_medium=(cpc|ppc|paid)/i.test(location.search);"
+  "var bot=/bot|crawl|spider|google|lighthouse|pagespeed|headlesschrome/i.test(navigator.userAgent);"
+  "if(!ad&&!bot&&!sessionStorage.getItem('sw-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(nc&&(nc.saveData||/2g|3g/.test(nc.effectiveType||'')))){"
   "sessionStorage.setItem('sw-intro','1');d.className+=' intro';"
   # end: remove all intro classes exactly once
   "var ended=0,end=function(){if(ended)return;ended=1;d.className=d.className.replace(/ intro(-go|-out|-nofont|-noimg)?/g,'')};"
@@ -732,6 +736,18 @@ LPS = [
     [("home","Looks like new","Clearing moss and staining lifts the look of the whole house."),("tool","Protects the roof","Regular cleaning helps prevent water damage, blocked gutters and early wear."),("shield","Done safely","Safe, professional methods designed to protect slate, tile and flat roofs.")],
     SVC["roof-cleaning"]["gal"]+["work-ridge-tiles-red-mortar"], SVC["roof-cleaning"]["faqs"],
     "Roof Cleaning & Moss Removal Dublin | Safeway Roofing","Roof cleaning and moss removal in Dublin, Kildare and Wicklow from a fully insured team. Request your quote or call 087 485 8556."),
+ LP("roofers-dublin","Roofers Dublin","Roofers in Dublin for repairs, gutters &amp; <span class='red'>chimneys.</span>","Local, fully insured roofers covering all of Dublin, north and south. Leaks, slates, flat roofs, new roofs, gutters and chimneys, with a clear quote before any work starts.","",
+    "work-roofers-laying-underlay",
+    ["Fully insured team",G,"24/7 emergency line","Clear, upfront quotes"],
+    [("tool","Repairs to full re-roofs","Leaks, slates, tiles, flat roofs and complete new roofs."),("home","Roofline and chimneys","UPVC gutters, fascia and soffits, plus chimney repairs and lead work."),("shield","Guaranteed in writing","Every completed project comes with a 10 year written guarantee.")],
+    ["work-roofers-laying-underlay","work-white-fascia-soffit-gutter-house","work-chimney-stack-lead-flashing-01","work-roof-relay-before-after-01"], HOME_FAQ,
+    "Roofers Dublin | Roof Repairs, Gutters & Chimneys | Safeway Roofing","Roofers covering all of Dublin: roof repairs, new roofs, flat roofs, gutters and chimneys. Fully insured with a 10 year written guarantee. Call 087 485 8556."),
+ LP("drone-roof-inspection","Drone roof inspection","See your roof <span class='red'>before</span> we quote.","Drone roof inspections across Dublin, Kildare and Wicklow. HD photos and video of your roof, with no ladders and nothing missed, then straight advice on what needs doing.","Drone Roof Inspections",
+    "svc-drone-inspection",
+    ["HD photos and video","Safe, ladder-free","Fully insured team","Clear, upfront quotes"],
+    [("cam","See it for yourself","HD photos and video of slates, tiles, ridges, valleys, flashing and chimneys."),("shield","Safe and quick","No ladders on your walls and nothing missed on awkward roofs."),("doc","Straight advice","We show you what we found and quote clearly for anything that needs doing.")],
+    ["work-terracotta-ridge-hip-tiles","work-terracotta-tile-roof-valley","work-roof-stripped-battens-gutter-view","work-chimney-lead-flashing-slate-roof"], SVC["drone-roof-inspections"]["faqs"],
+    "Drone Roof Inspection Dublin, Kildare & Wicklow | Safeway Roofing","Drone roof inspections in Dublin, Kildare and Wicklow: HD photos and video, ladder-free, from a fully insured roofing team. Call 087 485 8556."),
  LP("roofers-kildare","Roofers Kildare","Roofers in Kildare for repairs, gutters &amp; <span class='red'>chimneys.</span>","From Maynooth, Leixlip and Celbridge to Naas, Newbridge and Athy. Fully insured, with a clear quote before any work starts.","","work-white-fascia-soffit-gutter-house",
     ["Fully insured team",G,"24/7 emergency line","Clear, upfront quotes"],
     [("tool","Repairs to full re-roofs","Leaks, slates, tiles, flat roofs and complete new roofs."),("home","Roofline and chimneys","UPVC gutters, fascia and soffits, plus chimney repairs and lead work."),("shield","Guaranteed in writing","Every completed project comes with a 10 year written guarantee.")],

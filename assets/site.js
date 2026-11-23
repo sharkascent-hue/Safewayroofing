@@ -62,7 +62,7 @@
   });
 
   /* ---------- keep ad click IDs / UTMs for the enquiry email ---------- */
-  var qs = new URLSearchParams(location.search), keep = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  var qs = new URLSearchParams(location.search), keep = ['gclid', 'gbraid', 'wbraid', 'gad_source', 'gad_campaignid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
   var src = {};
   try { src = JSON.parse(sessionStorage.getItem('sw-src') || '{}'); } catch (e) {}
   keep.forEach(function (k) { if (qs.get(k)) src[k] = qs.get(k); });
