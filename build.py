@@ -13,7 +13,7 @@ EMAIL = "safewayroofing.chimneys@gmail.com"
 ADDR = "51 Bracken Road, Dublin, D18 CV48"
 FB = "https://www.facebook.com/profile.php?id=61596233412199"
 IG = "https://www.instagram.com/safewayroofing.chimneys"
-V = "22"
+V = "24"
 e = html.escape
 
 ICON = {
@@ -531,13 +531,13 @@ def home(r):
 </div></section>
 <div class="mq" aria-hidden="true"><div class="mq-t">{mq}{mq}</div></div>
 
-<section class="sec"><div class="wrap split"><div class="rv"><span class="eyebrow">Meet Safeway</span><h2>Roofing &amp; guttering help right when your home <span class="red">needs it.</span></h2>
+<section class="sec"><div class="wrap split media-first"><div class="rv"><span class="eyebrow">Meet Safeway</span><h2>Roofing &amp; guttering help right when your home <span class="red">needs it.</span></h2>
 <p class="lead">{e(NAME)} is a local roofing and chimney specialist covering Dublin, Kildare and Wicklow, with expertise in roofs, gutters and chimney repairs.</p>
 <p>Our insured, experienced team handles new roofs, repairs, flat roofing, UPVC fascia and soffits, guttering and chimney work, always aiming for sturdy, weatherproof results that look great. Beyond the roof itself, we also take on ridge tile repointing, brick cleaning and repointing, and interior and exterior painting and decorating.</p>
 <div class="grid g2" style="margin-top:26px"><div class="card"><div class="ic">{ic("shield")}</div><h3>Skilled &amp; insured</h3><p>Our insured, experienced crew delivers high-standard roofing, guttering and chimney work.</p></div>
 <div class="card"><div class="ic">{ic("clock")}</div><h3>Quick to respond</h3><p>From sudden leaks to planned upgrades, we arrive on time and finish the job properly.</p></div></div>
 <div class="btn-row"><a class="btn btn-line" href="{r}about-us/">More about us {ic("arrow")}</a></div></div>
-<div class="media rv">{img(r,"safeway-van","Safeway Roofing & Chimneys van",sm=False)}<div class="badge-f"><b>10 Year</b><span>Written guarantee</span></div></div></div></section>
+<div class="media tall rv">{img(r,"job-van-scaffold","Safeway Roofing & Chimneys van and scaffold on a job in Dublin",sm=False)}<div class="badge-f"><b>On the job</b><span>Across Dublin</span></div></div></div></section>
 
 <section class="sec dark"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Our services</span><h2>Roofing, guttering &amp; chimney services for your home.</h2></div>
 <a class="btn btn-ghost" href="{r}our-services/">View all services {ic("arrow")}</a></div>{scards(r, SERVICES[:8])}</div></section>

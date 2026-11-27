@@ -460,3 +460,6 @@ button.btn-ghost{background:transparent}
 }
 @media (max-width:860px){.hero.inner.with-form h1{font-size:clamp(1.8rem,7.4vw,2.4rem);margin-bottom:12px}.hero.inner.with-form .eyebrow{margin-bottom:12px}}
 @media (max-width:400px){.hero.inner.with-form .sub{display:none}.hero.inner.with-form .crumbs{display:none}}
+/* homepage job photo shows before the intro text on phones */
+@media (max-width:860px){.split.media-first>.media{order:-1}}
+@media (max-width:560px){.badge-f{padding:10px 14px;top:16px}.badge-f b{font-size:1.45rem}.badge-f span{font-size:.68rem}}
